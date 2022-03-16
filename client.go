@@ -207,10 +207,23 @@ func (d *Dialer) DialContext(ctx context.Context, urlStr string, requestHeader h
 	// RFC examples. Although the capitalization shouldn't matter, there are
 	// servers that depend on it. The Header.Set method is not used because the
 	// method canonicalizes the header names.
-	req.Header["Upgrade"] = []string{"websocket"}
-	req.Header["Connection"] = []string{"Upgrade"}
-	req.Header["Sec-WebSocket-Key"] = []string{challengeKey}
-	req.Header["Sec-WebSocket-Version"] = []string{"13"}
+	req.Header["Upgrade"] = requestHeader.Values("Upgrade")
+	req.Header["Connection"] = requestHeader.Values("Connection")
+	req.Header["Sec-WebSocket-Key"] = requestHeader.Values("Sec-WebSocket-Key")
+	req.Header["Sec-WebSocket-Version"] = requestHeader.Values("Sec-WebSocket-Version")
+
+	if len(req.Header["Upgrade"]) <= 0 {
+		req.Header["Upgrade"] = []string{"websocket"}
+	}
+	if len(req.Header["Connection"]) <= 0 {
+		req.Header["Connection"] = []string{"Upgrade"}
+	}
+	if len(req.Header["Sec-WebSocket-Key"]) <= 0 {
+		req.Header["Sec-WebSocket-Key"] = []string{challengeKey}
+	}
+	if len(req.Header["Sec-WebSocket-Version"]) <= 0 {
+		req.Header["Sec-WebSocket-Version"] = []string{"13"}
+	}
 	if len(d.Subprotocols) > 0 {
 		req.Header["Sec-WebSocket-Protocol"] = []string{strings.Join(d.Subprotocols, ", ")}
 	}
@@ -220,12 +233,7 @@ func (d *Dialer) DialContext(ctx context.Context, urlStr string, requestHeader h
 			if len(vs) > 0 {
 				req.Host = vs[0]
 			}
-		case k == "Upgrade" ||
-			k == "Connection" ||
-			k == "Sec-Websocket-Key" ||
-			k == "Sec-Websocket-Version" ||
-			k == "Sec-Websocket-Extensions" ||
-			(k == "Sec-Websocket-Protocol" && len(d.Subprotocols) > 0):
+		case (k == "Sec-Websocket-Protocol" && len(d.Subprotocols) > 0):
 			return nil, nil, errors.New("websocket: duplicate header not allowed: " + k)
 		case k == "Sec-Websocket-Protocol":
 			req.Header["Sec-WebSocket-Protocol"] = vs

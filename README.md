@@ -1,6 +1,6 @@
 # Gorilla WebSocket
 
-[![GoDoc](https://godoc.org/github.com/gorilla/websocket?status.svg)](https://godoc.org/github.com/gorilla/websocket)
+[![GoDoc](https://godoc.org/github.com/ouqiang/websocket?status.svg)](https://godoc.org/github.com/ouqiang/websocket)
 [![CircleCI](https://circleci.com/gh/gorilla/websocket.svg?style=svg)](https://circleci.com/gh/gorilla/websocket)
 
 Gorilla WebSocket is a [Go](http://golang.org/) implementation of the
@@ -9,17 +9,17 @@ Gorilla WebSocket is a [Go](http://golang.org/) implementation of the
 
 ---
 
-⚠️ **[The Gorilla WebSocket Package is looking for a new maintainer](https://github.com/gorilla/websocket/issues/370)**
+⚠️ **[The Gorilla WebSocket Package is looking for a new maintainer](https://github.com/ouqiang/websocket/issues/370)**
 
 ---
 
 ### Documentation
 
-* [API Reference](https://pkg.go.dev/github.com/gorilla/websocket?tab=doc)
-* [Chat example](https://github.com/gorilla/websocket/tree/master/examples/chat)
-* [Command example](https://github.com/gorilla/websocket/tree/master/examples/command)
-* [Client and server example](https://github.com/gorilla/websocket/tree/master/examples/echo)
-* [File watch example](https://github.com/gorilla/websocket/tree/master/examples/filewatch)
+* [API Reference](https://pkg.go.dev/github.com/ouqiang/websocket?tab=doc)
+* [Chat example](https://github.com/ouqiang/websocket/tree/master/examples/chat)
+* [Command example](https://github.com/ouqiang/websocket/tree/master/examples/command)
+* [Client and server example](https://github.com/ouqiang/websocket/tree/master/examples/echo)
+* [File watch example](https://github.com/ouqiang/websocket/tree/master/examples/filewatch)
 
 ### Status
 
@@ -29,11 +29,11 @@ package API is stable.
 
 ### Installation
 
-    go get github.com/gorilla/websocket
+    go get github.com/ouqiang/websocket
 
 ### Protocol Compliance
 
 The Gorilla WebSocket package passes the server tests in the [Autobahn Test
 Suite](https://github.com/crossbario/autobahn-testsuite) using the application in the [examples/autobahn
-subdirectory](https://github.com/gorilla/websocket/tree/master/examples/autobahn).
+subdirectory](https://github.com/ouqiang/websocket/tree/master/examples/autobahn).
 
