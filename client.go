@@ -160,10 +160,17 @@ func (d *Dialer) DialContext(ctx context.Context, urlStr string, requestHeader h
 	if d == nil {
 		d = &nilDialer
 	}
+	requestHeader.Values("Sec-WebSocket-Key")
 
-	challengeKey, err := generateChallengeKey()
-	if err != nil {
-		return nil, nil, err
+	var challengeKey string
+	var err error
+	if requestHeader.Get("Sec-WebSocket-Key") != "" {
+		challengeKey = requestHeader.Get("Sec-WebSocket-Key")
+	} else {
+		challengeKey, err = generateChallengeKey()
+		if err != nil {
+			return nil, nil, err
+		}
 	}
 
 	u, err := url.Parse(urlStr)
